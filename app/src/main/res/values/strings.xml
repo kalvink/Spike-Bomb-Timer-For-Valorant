@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Spike Bomb Timer for Valorant</string>
+    <string name="start">START</string>
+    <string name="bombtime_45">45</string>
+</resources>
