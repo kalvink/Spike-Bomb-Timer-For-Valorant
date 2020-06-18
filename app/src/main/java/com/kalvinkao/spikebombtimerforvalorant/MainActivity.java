@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         public void onTick(long ms) {
             if (Math.round(((float) ms) / 1000.0f) != secondsLeft) {
                 secondsLeft = Math.round(((float) ms) / 1000.0f);
-                text.setText(BuildConfig.FLAVOR + secondsLeft);
+                text.setText("" + secondsLeft);
             }
             Log.i("test", "ms=" + ms + " till finished=" + secondsLeft);
         }
