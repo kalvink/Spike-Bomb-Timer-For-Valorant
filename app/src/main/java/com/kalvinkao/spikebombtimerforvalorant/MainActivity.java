@@ -3,6 +3,7 @@ package com.kalvinkao.spikebombtimerforvalorant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
+    boolean adsOn = true;
 
 
     public CountDownTimer countDownTimer;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public Button startB;
     private final long startTime = 45000;
     public TextView text;
+    public TextView defuse;
     /* access modifiers changed from: private */
     public boolean timerHasStarted = false;
 
@@ -38,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
         @SuppressLint("SetTextI18n")
         public void onTick(long ms) {
+            if(secondsLeft == 7){
+                text.setTextColor(Color.rgb(255,0,0));
+                defuse.setText("Defuse!");
+            }
             if (Math.round(((float) ms) / 1000.0f) != secondsLeft) {
                 secondsLeft = Math.round(((float) ms) / 1000.0f);
                 text.setText("" + secondsLeft);
@@ -49,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         public void onFinish() {
             text.setText("0");
             startB.setText("RESTART");
+            text.setTextColor(Color.WHITE);
+            defuse.setText("");
             countDownTimer.cancel();
             timerHasStarted = false;
         }
@@ -72,12 +81,19 @@ public class MainActivity extends AppCompatActivity {
                 }
                 countDownTimer.cancel();
                 timerHasStarted = false;
+                text.setTextColor(Color.WHITE);
+                defuse.setText("");
                 startB.setText("RESTART");
             }
         });
 
         text = (TextView) findViewById(R.id.bombtime);
+        defuse = (TextView) findViewById(R.id.defuse);
         countDownTimer = new MyCountDownTimer(startTime, 100);
+
+
+        if(adsOn) {
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -87,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
+        }
     }
 }
 
