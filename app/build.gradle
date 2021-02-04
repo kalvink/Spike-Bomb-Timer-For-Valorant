@@ -4,13 +4,10 @@ android {
     signingConfigs {
         release {
             storeFile file('D:\\Projects\\Android\\Keystore\\FinalKeystore1.jks')
-            storePassword 'keystorepass1234'
-            keyPassword 'keystorepass1234'
-            keyAlias = 'key0'
         }
     }
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.kalvinkao.spikebombtimerforvalorant"
